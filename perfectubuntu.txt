@@ -1,0 +1,593 @@
+#!/bin/bash
+
+echo "# Asking questions ...";
+
+
+# Ask all the questions...
+echo "Program selection..." >> $LOGFILE
+
+# Multimedia
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Would you like to enhance your multimedia experience?";
+if [ $? == 0 ]
+then
+zenity --info --text "Installing restricted multimedia codecs might violate patent and/or other laws. Please make sure you have the right to use these codecs.";
+
+# Multimedia Extras
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Install Multimedia Codecs and Restricted Extras?";
+if [ $? == 0 ]
+then
+echo " - User has selected to add Multimedia extras." >> $LOGFILE
+MULTIMEDIA="1";
+fi
+
+# DVD
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Does your computer have a DVD player?";
+if [ $? == 0 ]
+then
+echo " - User has selected to add DVD support." >> $LOGFILE
+DVD="1"
+fi
+fi
+
+echo "6"; # Increase Progress Indicator
+
+# Internet
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Would you like to enhance your Internet experience?";
+if [ $? == 0 ]
+then
+
+# Flash Plugin
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Do you want me to install/update the Flash plugin for you?";
+if [ $? == 0 ]
+then
+echo " - User has selected to add the Flash plugin." >> $LOGFILE
+FLASH="1"
+fi
+
+# Skype
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Should I install Skype for you?";
+if [ $? == 0 ]
+then
+echo " - User has selected to add Skype." >> $LOGFILE
+SKYPE="1"
+fi
+
+# Miro
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Should I install Miro Internet TV for you?";
+if [ $? == 0 ]
+then
+echo " - User has selected to add Miro Internet TV." >> $LOGFILE
+MIRO="1"
+fi
+
+# Spam Filters
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Do you want spam filters for Evolution?";
+if [ $? == 0 ]
+then
+echo " - User has selected to add Spam Filters." >> $LOGFILE
+SPAM="1"
+fi
+
+fi
+
+
+echo "7"; # Increase Progress Indicator
+
+# System Appearance
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Would you like to enhance the overall look of $OSNAME?";
+if [ $? == 0 ]
+then
+
+# CCSM
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Compiz Config Settings Manager (ccsm) lets you control the advanced features of Compiz-Fusion.\r\n\r\nShould I install this for you?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add ccsm." >> $LOGFILE
+CCSM="1"
+fi
+
+# Emerald
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Emerald Window Decorator is a nice window decorator. It requires Compiz-Fusion.\r\n\r\nShould I install emerald for you?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add Emerald." >> $LOGFILE
+EWD="1"
+fi
+
+# GNOME Do
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="GNOME Do is an intelligent application and file launcher tool.\r\n\r\nShould I install GNOME Do for you?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add GNOME Do." >> $LOGFILE
+GNOMEDO="1"
+fi
+
+# Avant Window Navigator
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Avant Window Navigator is a very nice \"Mac OS\"-style dockbar for Linux. It requires a compositor, such as Compiz.\r\n\r\nShould I install avant-window-navigator for you?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add AWN." >> $LOGFILE
+AWN="1"
+fi
+
+fi
+
+echo "8"; # Increase Progress Indicator
+
+# Functionality
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Would you like to improve $OSNAME functionality?";
+if [ $? == 0 ]
+then
+
+# Preload
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Would you like to pre-load your most commonly used applications into memory so they load faster?\r\n\r\n<b>Note:</b> It can take up to a week for this to take effect."
+if [ $? == 0 ]
+then
+echo " - User has selected to add Preload." >> $LOGFILE
+PRELOAD="1"
+fi
+
+# AutoFSCK
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="After rebooting your $OSNAME system a number of times, you are forced to run a disk check on your hard drive. That means you have to wait a long time for your computer to boot. Instead, would you like to run the disk check at shutdown so you can walk away?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add AutoFSCK." >> $LOGFILE
+AUTOFSCK="1"
+fi
+
+# Ubuntu Tweak
+if [ "$ENVIRONMENT" = "gnome" ]; then
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="ubuntu-tweak allows you to tweak the user experience by simplifying the modification of advanced system settings. Should I install ubuntu-tweak for you?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add Ubuntu Tweak." >> $LOGFILE
+UBUNTUTWEAK="1"
+fi
+fi
+
+fi
+
+echo "9"; # Increase Progress Indicator
+
+# Miscellaneous
+
+# Virtualbox
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Should I install VirtualBox for you?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add VirtualBox." >> $LOGFILE
+VIRTBOX="1"
+fi
+
+# Back in Time
+if [ "$ENVIRONMENT" = "kde" ]; then
+BACKINTIMECOMMENT="<b>Note:</b> Make sure you have >= KDE 4.1\r\n\r\n";
+fi
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Back in Time is like a time machine for your files. Create backups that let you go back to previous versions.\r\n\r\n$BACKINTIMECOMMENT Would you like me to install Back in Time?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add Back in Time." >> $LOGFILE
+BACKINTIME="1"
+fi
+
+# Font Pack
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="I can install a <i>huge</i> number of fonts which you can use in your word processor, or even in programs like The GIMP.\r\n\r\nWould you like a bunch of new fonts?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add Font Pack." >> $LOGFILE
+FONTS="1"
+fi
+
+# Wine
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="WINE is an application that allows you to run some Microsoft Windows programs (.exe files) directly in Linux.\r\n\r\nShould I install this for you?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add Wine." >> $LOGFILE
+WINE="1"
+fi
+
+# Enhance file-roller file support
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="I can make it so you can use 7z, ZIP, Zip64, CAB, RAR, ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO and DEB archives in file-roller.\r\n\r\nDo you want me to do this?"
+if [ $? == 0 ]
+then
+echo " - User has selected to add Compression Support." >> $LOGFILE
+COMPRESSION="1"
+fi
+
+echo "10"; # Increase Progress Indicator
+echo "# Confirming acceptance of disclaimer..."
+
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="<b>This script does not come with or even imply any kind of warranty.</b> If your system breaks, you take full responsibility.\r\n\r\nI am about to modify your system. Are you sure this is okay?"
+if [ $? == 0 ]
+then
+echo " - User has confirmed they have read the disclaimer, and take full responsibility for a broken system." >> $LOGFILE
+GO="1" #deprecated, but still here
+
+# End of questions
+
+PRISM="1" # forcing prism because it is required by the Category5 TV player.
+
+
+echo "11"; # Increase Progress Indicator
+echo "# Setting up repositories..."
+
+cd ~
+if [ ! -e ".perfectbuntu/sources50" ] # Check if file exists.
+then
+echo This is apparently the first time you have run this script.
+echo
+echo Backing up your APT sources.list file to /etc/apt/sources.list.backup
+gksudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
+echo Done.
+echo
+echo Creating your APT entries now.
+mkdir ~/.perfectbuntu
+echo "" >> ~/.perfectbuntu/sources50
+echo "# Added by perfectbuntu - www.perfectbuntu.category5.tv" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+
+# Avoid duplicates by using grep
+if grep 'main restricted universe multiverse'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "deb http://ca.archive.ubuntu.com/ubuntu/ "$OSVER" main restricted universe multiverse" >> ~/.perfectbuntu/sources50
+fi
+
+if grep 'main restricted'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "deb-src http://ca.archive.ubuntu.com/ubuntu/ "$OSVER" main restricted" >> ~/.perfectbuntu/sources50
+fi
+
+# Medibuntu
+#
+# http://www.medibuntu.org/sources.list.d/karmic.list (Medibuntu Repository sample filename)
+#
+if [ -e "/etc/apt/sources.list.d/medibuntu.list" ] ; then # Check if file exists.
+if grep 'deb http://packages.medibuntu.org/ '$OSVER' free non-free' /etc/apt/sources.list.d/medibuntu.list > /dev/null; then
+echo "Keep existing /etc/apt/sources.list.d/medibuntu.list file from the same distro..."
+else
+echo "Removing existing /etc/apt/sources.list.d/medibuntu.list file from a different distro..."
+gksudo rm /etc/apt/sources.list.d/medibuntu.list
+dpkg -s medibuntu-keyring | grep "Status: install ok installed" > /dev/null 2>&1
+if [ $? = 0 ]; then
+echo "Removing existing medibuntu-keyring..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove medibuntu-keyring >> $LOGFILE"
+fi
+fi
+fi
+
+if [ -e "/etc/apt/sources.list.d/medibuntu.list" ] ; then # Check if file still exists.
+echo "Omitting duplicate..."
+else
+#echo "# deb http://packages.medibuntu.org/ "$OSVER" free non-free" >> ~/.perfectbuntu/sources50
+echo Retrieving Medibuntu Repository and GPG Signature...
+#// Medibuntu
+gksudo wget http://www.medibuntu.org/sources.list.d/$(lsb_release -cs).list \
+--output-document=/etc/apt/sources.list.d/medibuntu.list &&
+gksudo --message "$GKMSG" "apt-get -q update && >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --yes -q --allow-unauthenticated install medibuntu-keyring && >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get -q update >> $LOGFILE"
+echo Done.
+echo
+fi
+
+# Avant Window Navigator in Launchpad (Optional Repository)
+if [ "$AWN" = "1" ]; then
+if grep 'deb http://ppa.launchpad.net/awn-testing/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "# Avant Window Navigator in Launchpad" >> ~/.perfectbuntu/sources50
+echo "deb http://ppa.launchpad.net/awn-testing/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo Retrieving GPG Signature...
+#// Avant Window Navigator
+gksudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BF810CD5
+echo Done.
+echo
+fi
+if grep 'deb-src http://ppa.launchpad.net/awn-testing/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "deb-src http://ppa.launchpad.net/awn-testing/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+fi
+fi
+
+# Back in Time (Optional Repository)
+if [ "$BACKINTIME" = "1" ]; then
+if grep 'deb http://le-web.org/repository stable main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "# Back in Time" >> ~/.perfectbuntu/sources50
+echo "deb http://le-web.org/repository stable main" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+echo Retrieving GPG Signature...
+#// Back In Time
+wget -q http://le-web.org/repository/le-web.key -O- | gksudo apt-key add -
+fi
+fi
+
+# Ubuntu-Tweak (Optional Repository)
+if [ "$UBUNTUTWEAK" = "1" ]; then
+if grep 'deb http://ppa.launchpad.net/tualatrix/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "# Ubuntu-Tweak" >> ~/.perfectbuntu/sources50
+echo "deb http://ppa.launchpad.net/tualatrix/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo Retrieving GPG Signature...
+#// Ubuntu-Tweak
+gksudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com FE85409EEAB40ECCB65740816AF0E1940624A220
+echo Done.
+echo
+fi
+if grep 'deb-src http://ppa.launchpad.net/tualatrix/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "deb-src http://ppa.launchpad.net/tualatrix/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+fi
+fi
+
+# GNOME DO in Launchpad (Optional Repository)
+if [ "$GNOMEDO" = "1" ]; then
+if grep 'deb http://ppa.launchpad.net/do-core/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "# GNOME DO in Launchpad" >> ~/.perfectbuntu/sources50
+echo "deb http://ppa.launchpad.net/do-core/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo Retrieving GPG Signature...
+#// GNOME DO
+gpg --no-default-keyring --keyring /tmp/gnome-do.keyring --keyserver keyserver.ubuntu.com --recv A5D19FDCAA6ABB440CD3464628A8205077558DD0
+gpg --no-default-keyring --keyring /tmp/gnome-do.keyring --export --armor A5D19FDCAA6ABB440CD3464628A8205077558DD0 | gksudo apt-key add -
+rm /tmp/gnome-do.keyring
+echo Done.
+echo
+fi
+if grep 'deb-src http://ppa.launchpad.net/do-core/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "deb-src http://ppa.launchpad.net/do-core/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+fi
+fi
+
+# Miro Internet TV (Optional Repository)
+if [ "$MIRO" = "1" ]; then
+if grep 'deb http://ftp.osuosl.org/pub/pculture.org/miro/linux/repositories/ubuntu '$OSVER'/'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "# Miro Internet TV" >> ~/.perfectbuntu/sources50
+echo "deb http://ftp.osuosl.org/pub/pculture.org/miro/linux/repositories/ubuntu $OSVER/" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+fi
+fi
+
+# Moovida Media Center in Launchpad (Optional Repository)
+if [ "$MOOVIDA" = "1" ]; then
+if grep 'deb http://ppa.launchpad.net/moovida-packagers/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "# MOOVIDA Media Center in Launchpad" >> ~/.perfectbuntu/sources50
+echo "deb http://ppa.launchpad.net/moovida-packagers/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo Retrieving GPG Signature...
+#// MOOVIDA
+gksudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 26C2E075
+echo Done.
+echo
+fi
+if grep 'deb-src http://ppa.launchpad.net/moovida-packagers/ppa/ubuntu '$OSVER' main'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "deb-src http://ppa.launchpad.net/moovida-packagers/ppa/ubuntu "$OSVER" main" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+fi
+fi
+
+# VirtualBox (Optional Repository)
+if [ "$VIRTBOX" = "1" ]; then
+if grep 'deb http://download.virtualbox.org/virtualbox/debian '$OSVER' non-free'$ /etc/apt/sources.list > /dev/null; then
+echo "Omitting duplicate..."
+else
+echo "# VirtualBox" >> ~/.perfectbuntu/sources50
+echo "deb http://download.virtualbox.org/virtualbox/debian "$OSVER" non-free" >> ~/.perfectbuntu/sources50
+echo "" >> ~/.perfectbuntu/sources50
+echo Retrieving GPG Signature...
+wget -q http://download.virtualbox.org/virtualbox/debian/sun_vbox.asc -O- | gksudo apt-key add -
+echo Done.
+echo
+fi
+fi
+
+
+cat ~/.perfectbuntu/sources50 | gksudo tee -a /etc/apt/sources.list
+echo Done.
+echo
+fi
+
+
+echo "12"; # Increase Progress Indicator
+echo "# Cleaning up apt..."
+
+gksudo --message "$GKMSG" "apt-get clean >> $LOGFILE"
+
+
+echo "13"; # Increase Progress Indicator
+echo "# Updating apt..."
+gksudo --message "$GKMSG" "apt-get update >> $LOGFILE"
+
+
+
+#Run the installers
+
+echo "14"; # Increase Progress Indicator
+echo "# Beginning installation procedures..."
+
+if [ "$FLASH" = "1" ]; then
+echo "# Closing your browser windows..."
+killall -9 firefox
+echo "# Removing your old Flash plugin..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m --purge remove flashplugin-nonfree adobe-flashplugin flashplugin-installer >> $LOGFILE"
+echo "# Installing Flash plugin installer..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install flashplugin-installer >> $LOGFILE"
+fi
+
+if [ "$MULTIMEDIA" = "1" ]; then
+echo "# Installing multimedia codecs..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install ubuntu-restricted-extras >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install gstreamer0.10-plugins-ugly-multiverse gstreamer0.10-plugins-bad-multiverse gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly gstreamer0.10-ffmpeg libxine1-ffmpeg >> $LOGFILE"
+gksudo apt-get -y -f -m install "w"$BIT"codecs"
+if [[ $OSVER = 'karmic' ]]; then
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install libdvdread4 >> $LOGFILE"
+else
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install libdvdread3 >> $LOGFILE"
+fi
+fi
+
+if [ "$FONTS" = "1" ]; then
+echo "# Installing roughly a billion fonts..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install msttcorefonts >> $LOGFILE"
+echo
+echo NOTE: That should be the last EULA you\'ll have to deal with.
+echo You can go get a coffee now while I finish up.
+echo It\'s going to take a while.
+echo
+echo Continuing with font installations...
+gksudo --message "$GKMSG" "apt-get -y -f -m install ttf-gentium ttf-dustin ttf-georgewilliams ttf-sjfonts sun-java6-fonts ttf-larabie-deco ttf-larabie-straight ttf-larabie-uncommon ttf-linux-libertine ttf-mgopen ttf-sil-charis ttf-sil-doulos ttf-ubuntu-title gsfonts-x11 ttf-fifthhorseman-dkg-handwriting ttf-alee ttf-alee ttf-ancient-fonts ttf-arhangai ttf-arphic-bkai00mp ttf-arphic-bsmi00lp ttf-arphic-gbsn00lp ttf-arphic-gkai00mp ttf-arphic-ukai ttf-atarismall ttf-baekmuk ttf-bengali-fonts ttf-beteckna ttf-bpg-georgian-fonts ttf-breip ttf-devanagari-fonts ttf-dzongkha ttf-ecolier-court ttf-essays1743 ttf-f500 ttf-farsiweb ttf-freefarsi ttf-gfs-artemisia ttf-gfs-bodoni-classic ttf-gfs-complutum ttf-gfs-didot-classic ttf-gfs-gazis ttf-gfs-neohellenic ttf-gfs-solomos ttf-gfs-theokritos ttf-gujarati-fonts ttf-inconsolata ttf-indic-fonts ttf-isabella ttf-junicode ttf-kacst ttf-kannada-fonts ttf-khmeros ttf-kiloji ttf-kochi-gothic-naga10 ttf-kochi-mincho-naga10 ttf-konatu ttf-liberation ttf-manchufont ttf-marvosym ttf-mikachan ttf-mona ttf-mph-2b-damase ttf-nafees ttf-ocr-a ttf-oflb-euterpe ttf-oriya-fonts ttf-paktype ttf-punjabi-fonts ttf-radisnoir ttf-sazanami-gothic ttf-sazanami-mincho ttf-sil-abyssinica ttf-sil-andika ttf-sil-ezra ttf-sil-padauk ttf-sil-scheherazade ttf-sil-yi ttf-staypuft ttf-summersby ttf-tamil-fonts ttf-tmuni ttf-tuffy ttf-unfonts ttf-unfonts-extra ttf-uralic ttf-vlgothic ttf-wqy-zenhei ttf-xfree86-nonfree ttf-xfree86-nonfree-syriac >> $LOGFILE"
+echo Done.
+echo
+fi
+
+if [ "$DVD" = "1" ]; then
+echo "# Installing DVD decoders and support files..."
+if [[ $OSVER = 'karmic' ]]; then
+gksudo apt-get -y -f -m install libdvdcss2 libdvdread4 ffmpeg "w"$BIT"codecs"
+else
+gksudo apt-get -y -f -m install libdvdcss2 libdvdread3 ffmpeg "w"$BIT"codecs"
+fi
+fi
+
+if [ "$PRELOAD" = "1" ]; then
+echo "# Installing preload..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install preload >> $LOGFILE"
+fi
+
+if [ "$AUTOFSCK" = "1" ]; then
+echo "# Installing AutoFsck..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install autofsck >> $LOGFILE"
+fi
+
+if [ "$AWN" = "1" ]; then
+echo "# Installing avant-window-navigator Dockbar..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install avant-window-navigator awn-applets-c-extras awn-manager >> $LOGFILE"
+fi
+
+if [ "$COMPRESSION" = "1" ]; then
+echo "# Installing support for multiple archive types in file-roller..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install lzma unrar rar p7zip p7zip-full p7zip-rar >> $LOGFILE"
+fi
+
+if [ "$WINE" = "1" ]; then
+echo "# Installing WINE..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install wine >> $LOGFILE"
+fi
+
+if [ "$SKYPE" = "1" ]; then
+echo "# Installing Skype..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install skype >> $LOGFILE"
+fi
+
+if [ "$SPAM" = "1" ]; then
+echo "# Installing SPAM filters..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install spamassassin >> $LOGFILE"
+fi
+
+if [ "$CCSM" = "1" ]; then
+echo "# Installing CCSM advanced visual effects for Compiz Fusion..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install compizconfig-settings-manager >> $LOGFILE"
+echo "# Installing Fusion Icon for Compiz Fusion..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install fusion-icon >> $LOGFILE"
+fi
+
+if [ "$EWD" = "1" ]; then
+echo "# Installing Emerald Window Decorator..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install emerald >> $LOGFILE"
+fi
+
+if [ "$GNOMEDO" = "1" ]; then
+echo "# Installing GNOME Do application and file launcher..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install gnome-do >> $LOGFILE"
+fi
+
+if [ "$BACKINTIME" = "1" ]; then
+echo "# Installing Back In Time backup software..."
+if [ "$ENVIRONMENT" = "kde" ]; then
+gksudo --message "$GKMSG" "apt-get -y -f -m install backintime-common backintime-kde4 >> $LOGFILE"
+echo Done.
+else if [ "$ENVIRONMENT" = "gnome" ]; then
+gksudo --message "$GKMSG" "apt-get -y -f -m install backintime-common backintime-gnome >> $LOGFILE"
+echo Done.
+else
+echo "# Failed installing Back In Time (no Gnome or KDE)"
+sleep 3
+fi
+fi
+fi
+
+if [ "$UBUNTUTWEAK" = "1" ]; then
+echo "# Installing ubuntu-tweak..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install ubuntu-tweak >> $LOGFILE"
+fi
+
+if [ "$MIRO" = "1" ]; then
+echo "# Installing Miro Internet TV..."
+# No GPG Signature for Miro - Ignore unauthenticated error...
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m --allow-unauthenticated install miro >> $LOGFILE"
+fi
+
+if [ "$VIRTBOX" = "1" ]; then
+echo "# Removing old versions of VirtualBox..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove virtualbox-3.2 >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove virtualbox-3.1 >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove virtualbox-3.0 >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove virtualbox-2.2 >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove virtualbox-2.1 >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove virtualbox-2.0 >> $LOGFILE"
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m remove virtualbox >> $LOGFILE"
+
+echo "# Installing VirtualBox 4.0..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install virtualbox-4.0 >> $LOGFILE"
+echo "# Installing DKMS for VirtualBox 4.0..."
+gksudo --message "$GKMSG" "apt-get --force-yes -y -f -m install dkms >> $LOGFILE"
+fi
+
+if [ "$PRISM" = "1" ]; then
+echo "# Installing Mozilla Prism application..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install prism >> $LOGFILE"
+fi
+
+# Install stuff that everyone should have (no prompt)
+
+# xnest updates Terminal Server Client to support the XDMCP protocol allowing you to connect to other Linux machines. It's strange this isn't included out-of-the-box.
+echo "# Installing support for XDMCP..."
+gksudo --message "$GKMSG" "apt-get -y -f -m install xnest >> $LOGFILE"
+
+# end of stuff everyone should have
+
+zenity --title="Perfectbuntu $VER" --width $WIDTH --info --text="All done. Enjoy the Perfect $OSNAME!\r\n\r\nhttp://www.perfectbuntu.category5.tv"
+
+# Save log file
+zenity --ok-label="Yes" --cancel-label="No" --question --title="Perfectbuntu $VER" --text="Would you like to save a Perfectbuntu log file?";
+if [ $? == 0 ]
+then
+cp $LOGFILE `zenity --file-selection --save --confirm-overwrite --filename="perfectbuntu.log"`
+fi
+
+echo "100"
+echo "# Perfectbuntu is finished."
+
+else
+echo "100"
+echo "# Perfectbuntu has been cancelled."
+echo "User did not accept disclaimer. Exiting." >> $LOGFILE
+exit 1
+fi
